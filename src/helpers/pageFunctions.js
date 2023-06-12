@@ -2,6 +2,7 @@ import { searchCities, getWeatherByCity } from './weatherAPI';
 
 const token = import.meta.env.VITE_TOKEN;
 const forecastUrl = `http://api.weatherapi.com/v1/forecast.json?lang=pt&key=${token}&q=`;
+
 /**
  * Cria um elemento HTML com as informações passadas
  */
@@ -78,7 +79,7 @@ const next7Days = async (cityUrl) => {
   const days = '&days=7';
   const response = await fetch(forecastUrl + cityUrl + days);
   const data = response.json();
-  const weekWeather = data.forecast.forecastday.map((day) => ({
+  const weekWeather = await data.forecast.forecastday.map((day) => ({
     date: day.date,
     maxTemp: day.day.maxtemp_c,
     minTemp: day.day.mintemp_c,
@@ -92,11 +93,11 @@ const next7Days = async (cityUrl) => {
  */
 export function createCityElement(cityInfo) {
   const { name, country, temp, condition, icon, url } = cityInfo;
-
   const cityElement = createElement('li', 'city');
 
   const headingElement = createElement('div', 'city-heading');
   const nameElement = createElement('h2', 'city-name', name);
+  /* const countryElement = createElement('p', 'city-country', country); */
   const countryElement = createElement('p', 'city-country', country);
   headingElement.appendChild(nameElement);
   headingElement.appendChild(countryElement);
@@ -141,6 +142,7 @@ export async function handleSearch(event) {
   const arrSearchCities = await searchCities(searchValue);
   const promises = arrSearchCities.map((i) => getWeatherByCity(i.url));
   const arrInfo = await Promise.all(promises);
+  /* console.log(arrInfo); */
   /* return arrInfo; */
   const ul = document.querySelector('#cities');
   arrInfo.forEach((card) => {

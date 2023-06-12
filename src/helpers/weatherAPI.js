@@ -15,17 +15,17 @@ export const getWeatherByCity = async (cityURL) => {
   const response = await fetch(currentURL + cityURL);
   const data = await response.json();
   const { name } = data.location;
-  const { country } = data.location.country;
-  const { url } = cityURL;
+  const { country } = data.location;
   const temp = data.current.temp_c;
-  const cond = data.current.condition.text;
+  const condition = data.current.condition.text;
   const { icon } = data.current.condition;
+  const { url } = cityURL;
   const curWeather = {
-    temp,
-    cond,
-    icon,
     name,
     country,
+    temp,
+    condition,
+    icon,
     url,
   };
   return curWeather;
