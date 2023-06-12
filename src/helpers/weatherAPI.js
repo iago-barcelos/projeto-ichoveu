@@ -14,6 +14,9 @@ export const searchCities = async (term) => {
 export const getWeatherByCity = async (cityURL) => {
   const response = await fetch(currentURL + cityURL);
   const data = await response.json();
+  const { name } = data.location;
+  const { country } = data.location.country;
+  const { url } = cityURL;
   const temp = data.current.temp_c;
   const cond = data.current.condition.text;
   const { icon } = data.current.condition;
@@ -21,6 +24,9 @@ export const getWeatherByCity = async (cityURL) => {
     temp,
     cond,
     icon,
+    name,
+    country,
+    url,
   };
   return curWeather;
 };
