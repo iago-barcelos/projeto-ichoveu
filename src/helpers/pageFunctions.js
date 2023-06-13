@@ -1,7 +1,5 @@
 import { searchCities, getWeatherByCity, wheather7days } from './weatherAPI';
 
-const token = import.meta.env.VITE_TOKEN;
-/* console.log(`http://api.weatherapi.com/v1/forecast.json?lang=pt&key=${token}&q=Brasilia`); */
 /**
  * Cria um elemento HTML com as informações passadas
  */
