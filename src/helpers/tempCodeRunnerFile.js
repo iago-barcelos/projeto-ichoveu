@@ -1,1 +1,0 @@
-console.log(`http://api.weatherapi.com/v1/forecast.json?lang=pt&key=${token}&q=Brazil`);
